@@ -1,0 +1,101 @@
+import {
+  handleCreateBooking,
+  handleGetAllBooking,
+  handleGetBookingById,
+  handleDeleteBooking,
+  handleUpdateBooking,
+} from "../services/bookingService.js";
+
+// 1. Tạo lịch hẹn
+const createBooking = async (req, res) => {
+  try {
+    const data = req.body;
+    const result = await handleCreateBooking(data);
+
+    // Trả về kết quả từ service
+    return res.status(200).json(result);
+  } catch (error) {
+    console.log("Lỗi create booking:", error);
+    return res.status(500).json({
+      EM: "Lỗi server",
+      EC: -1,
+      DT: null,
+    });
+  }
+};
+
+// 2. Lấy chi tiết lịch hẹn theo ID
+const getBookingById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await handleGetBookingById(id); // Sửa 'phong' thành 'result'
+
+    return res.status(200).json(result);
+  } catch (error) {
+    console.log("Lỗi get booking by id:", error);
+    return res.status(500).json({
+      EM: "Lỗi server",
+      EC: -1,
+      DT: null,
+    });
+  }
+};
+
+// 3. Lấy tất cả lịch hẹn
+const getAllBooking = async (req, res) => {
+  try {
+    const result = await handleGetAllBooking(); // Sửa 'phong' thành 'result'
+
+    return res.status(200).json(result);
+  } catch (error) {
+    console.log("Lỗi get all booking:", error);
+    return res.status(500).json({
+      EM: "Lỗi server",
+      EC: -1,
+      DT: null,
+    });
+  }
+};
+
+// 4. Cập nhật lịch hẹn
+const updateBooking = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = req.body;
+    const result = await handleUpdateBooking(id, data);
+
+    return res.status(200).json(result);
+  } catch (error) {
+    console.log("Lỗi update booking:", error);
+    return res.status(500).json({
+      EM: "Lỗi server",
+      EC: -1,
+      DT: null,
+    });
+  }
+};
+
+// 5. Xóa lịch hẹn
+const deleteBooking = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await handleDeleteBooking(id); // Sửa 'phong' thành 'result'
+
+    return res.status(200).json(result);
+  } catch (error) {
+    console.log("Lỗi delete booking:", error);
+    return res.status(500).json({
+      EM: "Lỗi server",
+      EC: -1,
+      DT: null,
+    });
+  }
+};
+
+export {
+  createBooking,
+  getAllBooking,
+  getBookingById,
+  updateBooking,
+  deleteBooking,
+};
