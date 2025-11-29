@@ -9,7 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-
       amount: {
         type: Sequelize.DECIMAL(10, 0),
         allowNull: false,
@@ -31,11 +30,18 @@ module.exports = {
       note: {
         type: Sequelize.TEXT,
       },
+      // 👇👇👇 CẬP NHẬT bookingId 👇👇👇
       bookingId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "Booking", // Trỏ tới bảng Booking
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
-
+      // 👆👆👆 HẾT PHẦN CẬP NHẬT 👆👆👆
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

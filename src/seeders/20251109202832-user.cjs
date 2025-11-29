@@ -10,7 +10,7 @@ module.exports = {
     await queryInterface.bulkInsert(
       "User",
       [
-        // === 1. ADMIN ===
+        // === 1. ADMIN (ID dự kiến: 1) ===
         {
           fullName: "Trương Văn phong",
           account: "aminphong",
@@ -22,7 +22,7 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        // === 2. DOCTORS ===
+        // === 2. DOCTORS (ID dự kiến: 2, 3, 4) ===
         {
           fullName: "Khổng Văn Quân",
           account: "doctorquan",
@@ -53,6 +53,29 @@ module.exports = {
           passWord: hashedPassword,
           address: "Ba Vì, Hanoi",
           roleId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        // === 3. PATIENTS (ID dự kiến: 5, 6) === <--- BỔ SUNG THÊM
+        {
+          fullName: "Nguyễn Thị Bệnh Nhân",
+          account: "patient1",
+          email: "patient1@gmail.com",
+          phone: "0911222333",
+          passWord: hashedPassword,
+          address: "Hoàn Kiếm, Hà Nội",
+          roleId: 3, // Role Patient
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Trần Văn Khách Hàng",
+          account: "patient2",
+          email: "patient2@gmail.com",
+          phone: "0944555666",
+          passWord: hashedPassword,
+          address: "Đống Đa, Hà Nội",
+          roleId: 3, // Role Patient
           createdAt: new Date(),
           updatedAt: new Date(),
         },

@@ -16,7 +16,7 @@ module.exports = {
       status: {
         type: Sequelize.ENUM("pending", "confirmed", "cancelled", "completed"),
         allowNull: false,
-        defaultValue: "pending", // Tự động đặt là 'pending' khi mới tạo
+        defaultValue: "pending",
       },
       description: {
         type: Sequelize.TEXT,
@@ -29,15 +29,29 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      // 👇👇👇 CẬP NHẬT patientId 👇👇👇
       patientId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "User", // Trỏ tới bảng User (Bệnh nhân)
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
+      // 👇👇👇 CẬP NHẬT scheduleId 👇👇👇
       scheduleId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "Schedule", // Trỏ tới bảng Schedule
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
-
+      // 👆👆👆 HẾT PHẦN CẬP NHẬT 👆👆👆
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

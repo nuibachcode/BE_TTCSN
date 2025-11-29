@@ -9,14 +9,31 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      // 👇👇👇 CẬP NHẬT bookingId 👇👇👇
       bookingId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "Booking", // Trỏ tới bảng Booking
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE", // Xóa Booking thì xóa luôn dòng này trong bảng trung gian
+        // unique: 'booking_service_pair' // (Optional) Mở lại nếu muốn chống trùng lặp
       },
+      // 👇👇👇 CẬP NHẬT serviceId 👇👇👇
       serviceId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "Service", // Trỏ tới bảng Service
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+        // unique: 'booking_service_pair' // (Optional) Mở lại nếu muốn chống trùng lặp
       },
+      // 👆👆👆 HẾT PHẦN CẬP NHẬT 👆👆👆
       priceAtBooking: {
         type: Sequelize.DECIMAL(10, 0),
         allowNull: false,

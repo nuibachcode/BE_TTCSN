@@ -27,10 +27,18 @@ module.exports = {
       description: {
         type: Sequelize.TEXT,
       },
+      // 👇👇👇 CẬP NHẬT doctorId 👇👇👇
       doctorId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "User", // Trỏ tới bảng User (Bác sĩ)
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
+      // 👆👆👆 HẾT PHẦN CẬP NHẬT 👆👆👆
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
