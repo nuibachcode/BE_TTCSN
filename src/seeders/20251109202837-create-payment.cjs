@@ -4,27 +4,40 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
-      "Payment",
+      "payment", // 🛑 ĐÃ SỬA: Tên bảng là "payment" (chữ thường)
       [
-        // Thanh toán cho Booking 1
+        // ===== THANH TOÁN CHO BOOKING 1 (Nhổ răng khôn) =====
         {
-          amount: 450000, // Tổng 150k + 300k
-          method: "cash",
+          amount: 2000000, // Khám (0đ) + Nhổ răng (2tr)
+          method: "banking",
           status: "success",
-          transactionCode: null,
-          note: "Thu tiền mặt tại quầy",
+          transactionCode: "VCB99887766",
+          note: "Chuyển khoản VCB - Nhổ răng khôn",
           bookingId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        // Thanh toán (cọc) cho Booking 2
+
+        // ===== THANH TOÁN CHO BOOKING 3 (Nhổ răng khôn - Tiền mặt) =====
         {
-          amount: 5000000,
-          method: "banking",
+          amount: 2000000,
+          method: "cash",
           status: "success",
-          transactionCode: "VCB123456789",
-          note: "Đặt cọc niềng răng",
-          bookingId: 2,
+          transactionCode: null,
+          note: "Thu tiền mặt tại quầy lễ tân",
+          bookingId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+
+        // ===== THANH TOÁN CHO BOOKING 5 (Lấy cao răng) =====
+        {
+          amount: 300000,
+          method: "banking", // 🛑 ĐÃ SỬA: Enum chỉ cho phép 'cash', 'credit_card', 'banking'
+          status: "success",
+          transactionCode: "MOMO123456",
+          note: "Thanh toán qua QR Momo",
+          bookingId: 5,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -34,6 +47,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("Payment", null, {});
+    await queryInterface.bulkDelete("payment", null, {}); // 🛑 ĐÃ SỬA TÊN BẢNG
   },
 };

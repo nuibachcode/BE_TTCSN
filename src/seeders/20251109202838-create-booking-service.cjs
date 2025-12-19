@@ -6,26 +6,54 @@ module.exports = {
     await queryInterface.bulkInsert(
       "BookingService",
       [
-        // Booking 1 dùng dịch vụ 1 (Khám) và 2 (Cạo vôi)
+        // ===== BOOKING 1: Đau răng hàm dưới =====
         {
           bookingId: 1,
-          serviceId: 1,
-          priceAtBooking: 150000,
+          serviceId: 4, // Khám răng & tư vấn tổng quát
+          priceAtBooking: 0,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           bookingId: 1,
-          serviceId: 2,
-          priceAtBooking: 300000,
+          serviceId: 3, // Nhổ răng khôn không đau
+          priceAtBooking: 2000000,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        // Booking 2 dùng dịch vụ 4 (Niềng răng - ví dụ)
+
+        // ===== BOOKING 2: Tư vấn bọc răng sứ =====
         {
           bookingId: 2,
-          serviceId: 4,
-          priceAtBooking: 30000000,
+          serviceId: 4, // Khám răng & tư vấn tổng quát (Miễn phí)
+          priceAtBooking: 0,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+
+        // ===== BOOKING 3: Nhổ răng khôn (đã hẹn) =====
+        {
+          bookingId: 3,
+          serviceId: 3, // Nhổ răng khôn không đau
+          priceAtBooking: 2000000,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+
+        // ===== BOOKING 4: Tái khám (Đã hủy) =====
+        {
+          bookingId: 4,
+          serviceId: 4, // Khám răng & tư vấn tổng quát
+          priceAtBooking: 0,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+
+        // ===== BOOKING 5: Lấy cao răng =====
+        {
+          bookingId: 5,
+          serviceId: 5, // Lấy cao răng & đánh bóng
+          priceAtBooking: 300000,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
