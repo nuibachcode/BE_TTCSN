@@ -1,19 +1,22 @@
 "use strict";
-const bcrypt = require("bcrypt");
+
+const bcrypt = require("bcrypt"); // Dùng require thay vì import
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+  // Dùng module.exports thay vì export default
   async up(queryInterface, Sequelize) {
-    // Băm mật khẩu một lần
-    const hashedPassword = await bcrypt.hash("123456", 10);
+    // Tạo mật khẩu mã hóa
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync("123456", salt);
 
     await queryInterface.bulkInsert(
       "User",
       [
-        // === 1. ADMIN (ID dự kiến: 1) ===
+        // ===== ADMIN (1) =====
         {
-          fullName: "Trương Văn phong",
-          account: "aminphong",
+          fullName: "Trương Văn Phong",
+          account: "admin",
           email: "adminphong@gmail.com",
           phone: "0814568895",
           passWord: hashedPassword,
@@ -22,14 +25,15 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        // === 2. DOCTORS (ID dự kiến: 2, 3, 4) ===
+
+        // ===== DOCTORS (2–5) =====
         {
           fullName: "Khổng Văn Quân",
-          account: "doctorquan",
+          account: "doctor",
           email: "doctorquan@gmail.com",
           phone: "0902657894",
           passWord: hashedPassword,
-          address: "456 Bắc Từ Liêm, Hà Nội",
+          address: "Bắc Từ Liêm, Hà Nội",
           roleId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -51,12 +55,24 @@ module.exports = {
           email: "doctorthinh@gmail.com",
           phone: "0908785654",
           passWord: hashedPassword,
-          address: "Ba Vì, Hanoi",
+          address: "Ba Vì, Hà Nội",
           roleId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        // === 3. PATIENTS (ID dự kiến: 5, 6) === <--- BỔ SUNG THÊM
+        {
+          fullName: "Lê Minh Đức",
+          account: "doctorduc",
+          email: "doctorduc@gmail.com",
+          phone: "0977554433",
+          passWord: hashedPassword,
+          address: "Hà Đông, Hà Nội",
+          roleId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+
+        // ===== PATIENTS (6–10) =====
         {
           fullName: "Nguyễn Thị Bệnh Nhân",
           account: "patient1",
@@ -64,18 +80,220 @@ module.exports = {
           phone: "0911222333",
           passWord: hashedPassword,
           address: "Hoàn Kiếm, Hà Nội",
-          roleId: 3, // Role Patient
+          roleId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          fullName: "Trần Văn Khách Hàng",
+          fullName: "Trần Văn Khách",
           account: "patient2",
           email: "patient2@gmail.com",
           phone: "0944555666",
           passWord: hashedPassword,
           address: "Đống Đa, Hà Nội",
-          roleId: 3, // Role Patient
+          roleId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Phạm Thị Hoa",
+          account: "patient3",
+          email: "patient3@gmail.com",
+          phone: "0988776655",
+          passWord: hashedPassword,
+          address: "Thanh Xuân, Hà Nội",
+          roleId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Đỗ Văn Long",
+          account: "patient4",
+          email: "patient4@gmail.com",
+          phone: "0933667788",
+          passWord: hashedPassword,
+          address: "Gia Lâm, Hà Nội",
+          roleId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Hoàng Thị Mai",
+          account: "patient5",
+          email: "patient5@gmail.com",
+          phone: "0966443322",
+          passWord: hashedPassword,
+          address: "Long Biên, Hà Nội",
+          roleId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+
+        // ===== DOCTORS MỚI (11-20) =====
+        {
+          fullName: "Vũ Quốc Huy",
+          account: "doctorhuy",
+          email: "doctorhuy@gmail.com",
+          phone: "0902000016",
+          passWord: hashedPassword,
+          address: "Thanh Xuân, Hà Nội",
+          roleId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Nguyễn Thị Mai Anh",
+          account: "doctormai",
+          email: "doctormai@gmail.com",
+          phone: "0902000017",
+          passWord: hashedPassword,
+          address: "Hai Bà Trưng, Hà Nội",
+          roleId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Lê Quang Khải",
+          account: "doctorkhai",
+          email: "doctorkhai@gmail.com",
+          phone: "0902000018",
+          passWord: hashedPassword,
+          address: "Long Biên, Hà Nội",
+          roleId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Đặng Minh Tâm",
+          account: "doctortam",
+          email: "doctortam@gmail.com",
+          phone: "0902000019",
+          passWord: hashedPassword,
+          address: "Nam Từ Liêm, Hà Nội",
+          roleId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Hoàng Quốc Việt",
+          account: "doctorviet",
+          email: "doctorviet@gmail.com",
+          phone: "0902000020",
+          passWord: hashedPassword,
+          address: "Bắc Từ Liêm, Hà Nội",
+          roleId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Phan Thị Hồng",
+          account: "doctorhong",
+          email: "doctorhong@gmail.com",
+          phone: "0902000021",
+          passWord: hashedPassword,
+          address: "Hoàng Mai, Hà Nội",
+          roleId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Trịnh Văn Phúc",
+          account: "doctorphuc",
+          email: "doctorphuc@gmail.com",
+          phone: "0902000022",
+          passWord: hashedPassword,
+          address: "Gia Lâm, Hà Nội",
+          roleId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Bùi Thị Lan",
+          account: "doctorlan",
+          email: "doctorlan@gmail.com",
+          phone: "0902000023",
+          passWord: hashedPassword,
+          address: "Đống Đa, Hà Nội",
+          roleId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Ngô Minh Tuấn",
+          account: "doctortuan",
+          email: "doctortuan@gmail.com",
+          phone: "0902000024",
+          passWord: hashedPassword,
+          address: "Sơn Tây, Hà Nội",
+          roleId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Đỗ Thị Thu Hà",
+          account: "doctorha",
+          email: "doctorha@gmail.com",
+          phone: "0902000025",
+          passWord: hashedPassword,
+          address: "Ba Đình, Hà Nội",
+          roleId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+
+        // ===== PATIENTS MỚI (21-25) =====
+        {
+          fullName: "Bùi Văn Tùng",
+          account: "patient6",
+          email: "patient6@gmail.com",
+          phone: "0911888999",
+          passWord: hashedPassword,
+          address: "Tây Hồ, Hà Nội",
+          roleId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Đinh Thị Tuyết",
+          account: "patient7",
+          email: "patient7@gmail.com",
+          phone: "0944777888",
+          passWord: hashedPassword,
+          address: "Hoàng Mai, Hà Nội",
+          roleId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Vương Văn Quyết",
+          account: "patient8",
+          email: "patient8@gmail.com",
+          phone: "0988666555",
+          passWord: hashedPassword,
+          address: "Thanh Trì, Hà Nội",
+          roleId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Lý Thị Mộng",
+          account: "patient9",
+          email: "patient9@gmail.com",
+          phone: "0933999111",
+          passWord: hashedPassword,
+          address: "Hà Đông, Hà Nội",
+          roleId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          fullName: "Trương Văn Ba",
+          account: "patient10",
+          email: "patient10@gmail.com",
+          phone: "0966222444",
+          passWord: hashedPassword,
+          address: "Nam Từ Liêm, Hà Nội",
+          roleId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -85,9 +303,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Chạy khi undo
-     */
     await queryInterface.bulkDelete("User", null, {});
   },
 };
