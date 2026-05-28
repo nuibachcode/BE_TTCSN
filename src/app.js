@@ -24,14 +24,14 @@ app.use(cookieParser());
 initApiRoutes(app);
 
 // Test the database connection
-try {
-  await sequelize.authenticate();
-  console.log("Connection has been established successfully.");
-} catch (error) {
-  console.error("Unable to connect to the database:", error);
-  sequelize.close();
-  process.exit(1);
-}
+sequelize.authenticate()
+  .then(() => {
+    console.log("Connection has been established successfully.");
+  })
+  .catch((error) => {
+    console.error("Unable to connect to the database:", error);
+    console.warn("Warning: Server is running but database connection failed.");
+  });
 
 const port = process.env.PORT || 8081;
 
