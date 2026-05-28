@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import initApiRoutes from "./routes/api.js";
 import db from "./models/index.cjs";
-import configCORS from "./configs/configCors.js";
+import configCORS from "./configs/configCORS.js";
 import cookieParser from "cookie-parser";
 
 const { sequelize } = db;
