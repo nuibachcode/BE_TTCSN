@@ -4,7 +4,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
-      "payment", // 🛑 ĐÃ SỬA: Tên bảng là "payment" (chữ thường)
+      "Payment", // 🛑 ĐÃ SỬA: Tên bảng là "Payment" (chữ hoa)
       [
         // ===== THANH TOÁN CHO BOOKING 1 (Nhổ răng khôn) =====
         {
@@ -42,7 +42,7 @@ module.exports = {
           updatedAt: new Date(),
         },
       ],
-      {}
+      {},
     );
   },
 
