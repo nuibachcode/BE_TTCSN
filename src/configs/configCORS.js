@@ -15,6 +15,14 @@ const configCORS = (app) => {
     }
   });
 
+  // Whitelist Vercel production frontend URL
+  const prodOrigins = ["https://fe-ttcsn-sw8n.vercel.app"];
+  prodOrigins.forEach((origin) => {
+    if (!allowedOrigins.includes(origin)) {
+      allowedOrigins.push(origin);
+    }
+  });
+
   if (!allowedOrigins.includes("https://mydomain.com")) {
     allowedOrigins.push("https://mydomain.com");
   }
