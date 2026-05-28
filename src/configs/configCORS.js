@@ -7,6 +7,14 @@ const configCORS = (app) => {
     ? process.env.FE_URL.split(",").map((url) => url.trim())
     : ["http://localhost:5173"];
 
+  // Luôn cho phép localhost cho việc phát triển và test ở local
+  const localOrigins = ["http://localhost:5173", "http://localhost:3000", "http://localhost:5174"];
+  localOrigins.forEach((origin) => {
+    if (!allowedOrigins.includes(origin)) {
+      allowedOrigins.push(origin);
+    }
+  });
+
   if (!allowedOrigins.includes("https://mydomain.com")) {
     allowedOrigins.push("https://mydomain.com");
   }
